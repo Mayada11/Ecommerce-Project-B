@@ -27,35 +27,36 @@ export class SignInComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.userService.isLoggedIn())
-    this.router.navigateByUrl('/userprofile');
+    // if(this.userService.isLoggedIn())
+    // this.router.navigateByUrl('/adminProduct');
   }
 
   onSubmit(form : NgForm){
-
-    console.log(form.value);
+    // this.ngOnInit();
+    // console.log(form.value);
     this.userService.login(form.value).subscribe(
       res => {
         console.log(res);
         this.userService.setToken(res['token']);
         console.log(this.userService.userType);
         localStorage['userType'] = res['userType'];
-       
-        console.log(res['name']);
-        
+        console.log( localStorage['userType']);
+        // location.reload();
+    
         if(res['userType']===0){
           // this.router.navigate(['/dashboard']);
           this.router.navigate(['/adminProduct']);
         }
         else if(res['userType']===1){
-          this.router.navigateByUrl('/producthome');
+          this.router.navigate(['/producthome']);
         }
-       
+      
       },
       err => {
         this.serverErrorMessages = err.error.message;
       }
     );
+
   }  
 
 }

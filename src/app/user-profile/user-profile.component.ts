@@ -18,6 +18,7 @@ export class UserProfileComponent implements OnInit {
         console.log(this.userDetails);
         this.userService.getUserType(this.userDetails.userType);
         localStorage['userName'] = this.userDetails.name
+        
       },
       err => { 
         console.log(err);

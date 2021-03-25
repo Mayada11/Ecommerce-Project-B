@@ -19,25 +19,15 @@
         <a class="nav-link" (click)=goToBottom()>Contact</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link " href="/signup" tabindex="-1" aria-disabled="true">Sign up</a>
-      </li>
+      <button class="dropdown-item" type="button" (click)="onLogout()">Logout</button>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Sign in</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link"></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="profile()">Profile</a>
-      </li>
+     
+      
+     
       <!-- <li class="nav-item">
         <a class="nav-link" (click)="add()" >Add Product</a>
       </li> -->
-      <li class="nav-item">
-        <a class="nav-link"  (click)="onLogout()" >Log Out</a>
-      </li>
+      
     </ul>
 
     <!-- <a class="navbar-brand" href="/card">
@@ -55,23 +45,24 @@
       </ul></div> -->
       <div class="btn-group dropleft" *ngIf = "isLoginAsAdmin()">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{userName}}
+          {{userDetails.name}}
         </button>
+  
         <div class="dropdown-menu">
-          <button class="dropdown-item" type="button">Orders</button>
-    <button class="dropdown-item" type="button">Logout</button>
+          <button class="dropdown-item" type="button" routerLink="/adminOrder">Orders</button>
+    <button class="dropdown-item" type="button" (click)="onLogout()">Logout</button>
         </div>
       </div>
       <div class="btn-group dropleft" *ngIf = "isLoginAsUser()">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{userName}}
+          {{userDetails.name}}
         </button>
         <div class="dropdown-menu">
-          <button class="dropdown-item" type="button">profile</button>
-    <button class="dropdown-item" type="button">Logout</button>
+          <button class="dropdown-item" type="button" (click)="profile()">profile</button>
+    <button class="dropdown-item" type="button" (click)="onLogout()">Logout</button>
         </div>
       </div>
-  
+      <img [src]="userDetails.userImage" alt="Avatar" class="avatar" *ngIf="isLoginAsUser()">
 
 <!-- <nav class="navbar navbar-light">
   <div class="container-fluid">
@@ -94,5 +85,6 @@
 </nav>
  -->
 
-
+</div>
+</nav>
 

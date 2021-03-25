@@ -13,13 +13,37 @@ export class NavComponent implements OnInit {
   search:any;
   userType:any;
   userOradmin:any;
-  constructor(private userService: UserService,private router:Router,private route:ActivatedRoute) { }
+  userDetails:any;
+ public oni:any;
+  constructor(private userService: UserService,private router:Router,private route:ActivatedRoute) { 
+  
+  }
 isLogin:any;
-  ngOnInit(): void {
-    this.userOradmin = localStorage['userName'];
+public  ngOnInit(): void {
+  this.oni = this.ngOnInit;
+     this.userType = localStorage['userType']
+   console.log(this.userType)
+    if(this.userService.isLoggedIn()){ this.userService.getUserProfile().subscribe(
+      res => {
+      
+        this.userDetails = res['user'];
+        console.log(this.userDetails);
+       
+      //  location.reload();
+        
+      },
+      err => { 
+        console.log(err);
+        
+      }
+    );
     localStorage['isLoged']=this.userService.isLoggedIn();
     this.isLogin= localStorage['isLoged'];
     console.log(this.isLogin)
+  }
+   
+   
+   
   }
   onSearch(){
     if(this.search){
@@ -35,7 +59,7 @@ isLogin:any;
       this.router.navigate(['/userprofile']);
     }
     else{
-      console.log(this.userService.isLoggedIn())
+  
       this.router.navigate(['/login']);
     }
   }
@@ -47,23 +71,22 @@ isLogin:any;
   onLogout(){
     this.userService.deleteToken();
     // this.router.navigate(['/login']);
-    location.reload()
+    this.router.navigate(['/login']);
   }
 
 
-  add(){
-    if(this.userService.isLoggedIn() && this.userService.userType==0){
-      this.router.navigateByUrl('/adminProduct');
+  // add(){
+  //   if(this.userService.isLoggedIn() && this.userService.userType==0){
+  //     this.router.navigateByUrl('/adminProduct');
       
-    }
-    else{
-      this.router.navigateByUrl('/login');
-    }
-  }
+  //   }
+  //   else{
+  //     this.router.navigateByUrl('/login');
+  //   }
+  // }
   isLoginAsAdmin(){
-    this.userType = localStorage['userType'];
-    console.log(this.userType);
-   if(this.userService.isLoggedIn()==true && this.userType==0){
+    
+   if(this.userService.isLoggedIn()==true &&  this.userType==0){
         return true;
 
    }else{
@@ -71,8 +94,7 @@ isLogin:any;
    }
   }
   isLoginAsUser(){
-    this.userType = localStorage['userType'];
-    console.log(this.userType);
+  
    if(this.userService.isLoggedIn()==true && this.userType==1){
         return true;
 
