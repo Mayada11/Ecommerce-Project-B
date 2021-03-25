@@ -68,7 +68,7 @@ orders:any;
       this.orders = this.res.body;
       console.log(this.orders);
       alert("Order placed successfully");
-      
+      this.ngOnInit();
       // location.reload();
     })
   }

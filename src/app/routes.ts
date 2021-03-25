@@ -73,6 +73,9 @@ export const appRoutes: Routes = [
         path: 'cartPage/:id', component: CartPageComponent , canActivate:[AuthGuard]
     },
     {
+            path:'carty',component:CartPageComponent,canActivate:[AuthGuard]
+    },
+    {
         path: 'searchPage', component: SearchProductComponent
     },
 

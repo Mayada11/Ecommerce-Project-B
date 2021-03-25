@@ -25,7 +25,8 @@ export class SignInComponent implements OnInit {
     password:''
   };
 
-
+userDetails:any;
+reess:any;
   ngOnInit() {
     // if(this.userService.isLoggedIn())
     // this.router.navigateByUrl('/adminProduct');
@@ -38,7 +39,7 @@ export class SignInComponent implements OnInit {
       res => {
         console.log(res);
         this.userService.setToken(res['token']);
-        console.log(this.userService.userType);
+   
         localStorage['userType'] = res['userType'];
         console.log( localStorage['userType']);
         // location.reload();
@@ -50,6 +51,22 @@ export class SignInComponent implements OnInit {
         else if(res['userType']===1){
           this.router.navigate(['/producthome']);
         }
+        this.userService.getUserProfile().subscribe(
+          res => {
+          location.reload();
+            this.userDetails = res['user'];
+            console.log(this.userDetails);
+            localStorage['userOrAdminName'] = this.userDetails.name;
+            localStorage['userOrAdminImage'] = this.userDetails.userImage;
+            localStorage['userT'] = this.userDetails.userType;
+            
+            
+          },
+          err => { 
+            console.log(err);
+            
+          }
+        );
       
       },
       err => {

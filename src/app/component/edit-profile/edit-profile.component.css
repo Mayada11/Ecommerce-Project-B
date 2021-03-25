@@ -7,6 +7,12 @@ body{
  * Panels
  */
 /*** General styles ***/
+.container{
+  border: 1px solid indianred;
+  border-radius: 2em;
+ padding: 2%;
+}
+
 .panel {
   box-shadow: none;
 }

@@ -19,7 +19,7 @@
         <a class="nav-link" (click)=goToBottom()>Contact</a>
       </li>
 
-      <button class="dropdown-item" type="button" (click)="onLogout()">Logout</button>
+      <!-- <button class="dropdown-item" type="button" (click)="onLogout()">Logout</button> -->
 
      
       
@@ -45,7 +45,7 @@
       </ul></div> -->
       <div class="btn-group dropleft" *ngIf = "isLoginAsAdmin()">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{userDetails.name}}
+          {{userOrAdminName}}
         </button>
   
         <div class="dropdown-menu">
@@ -55,14 +55,14 @@
       </div>
       <div class="btn-group dropleft" *ngIf = "isLoginAsUser()">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{userDetails.name}}
+          {{userOrAdminName}}
         </button>
         <div class="dropdown-menu">
           <button class="dropdown-item" type="button" (click)="profile()">profile</button>
     <button class="dropdown-item" type="button" (click)="onLogout()">Logout</button>
         </div>
       </div>
-      <img [src]="userDetails.userImage" alt="Avatar" class="avatar" *ngIf="isLoginAsUser()">
+      <img src={{userOrAdminImage}} alt="Avatar" class="avatar" *ngIf="isLoginAsUser()">
 
 <!-- <nav class="navbar navbar-light">
   <div class="container-fluid">

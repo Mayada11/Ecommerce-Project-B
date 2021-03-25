@@ -16,31 +16,47 @@ export class NavComponent implements OnInit {
   userDetails:any;
  public oni:any;
   constructor(private userService: UserService,private router:Router,private route:ActivatedRoute) { 
-  
+    this.userType = localStorage['userT']
+  this.userOrAdminName = localStorage['userOrAdminName'];
+this.userOrAdminImage = localStorage['userOrAdminImage'];
+console.log(this.userType);
+console.log(this.userOrAdminImage);
+console.log(this.userOrAdminName);
   }
 isLogin:any;
+userOrAdminName:any;
+userOrAdminImage:any;
 public  ngOnInit(): void {
-  this.oni = this.ngOnInit;
-     this.userType = localStorage['userType']
-   console.log(this.userType)
-    if(this.userService.isLoggedIn()){ this.userService.getUserProfile().subscribe(
-      res => {
-      
-        this.userDetails = res['user'];
-        console.log(this.userDetails);
-       
-      //  location.reload();
-        
-      },
-      err => { 
-        console.log(err);
-        
-      }
-    );
-    localStorage['isLoged']=this.userService.isLoggedIn();
-    this.isLogin= localStorage['isLoged'];
-    console.log(this.isLogin)
+  if(this.userService.isLoggedIn()){
+    this.userType = localStorage['userT']
+    this.userOrAdminName = localStorage['userOrAdminName'];
+  this.userOrAdminImage = localStorage['userOrAdminImage'];
+  console.log(this.userType);
+  console.log(this.userOrAdminImage);
+  console.log(this.userOrAdminName);
   }
+    //  this.userType = localStorage['userT']
+  
+  // if(this.userService.isLoggedIn()){
+
+// }
+  //     res => {
+      
+  //       this.userDetails = res['user'];
+  //       console.log(this.userDetails);
+       
+  //     //  location.reload();
+        
+  //     },
+  //     err => { 
+  //       console.log(err);
+        
+  //     }
+  //   );
+  //   localStorage['isLoged']=this.userService.isLoggedIn();
+  //   this.isLogin= localStorage['isLoged'];
+  //   console.log(this.isLogin)
+  // }
    
    
    
@@ -71,6 +87,10 @@ public  ngOnInit(): void {
   onLogout(){
     this.userService.deleteToken();
     // this.router.navigate(['/login']);
+    
+    localStorage['userType'] = undefined;
+    localStorage['userOrAdminName'] = undefined;
+    localStorage['userOrAdminImage'] = undefined;
     this.router.navigate(['/login']);
   }
 
@@ -86,19 +106,23 @@ public  ngOnInit(): void {
   // }
   isLoginAsAdmin(){
     
-   if(this.userService.isLoggedIn()==true &&  this.userType==0){
+   if((this.userService.isLoggedIn()===true) &&  (this.userType==0)){
+     console.log(this.userType)
         return true;
 
    }else{
+     console.log("hi not admin")
      return false;
    }
   }
   isLoginAsUser(){
   
-   if(this.userService.isLoggedIn()==true && this.userType==1){
+   if((this.userService.isLoggedIn()===true) && (this.userType==1)){
+    console.log(this.userType)
         return true;
 
    }else{
+    console.log("hi not user")
      return false;
    }
   }

@@ -34,7 +34,15 @@ body {
     background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
     background: linear-gradient(to right, #ee5a6f, #f29263)
 }
-
+button{
+   background: linear-gradient(to right, #ee5a6f, #f29263);
+   border: 1px solid #f29263;
+   border-radius: 0.5em; 
+   color: #e0e0e0;
+}
+button:hover{
+    box-shadow: 2 2 2 2 #f29263;
+}
 .user-profile {
     padding: 20px 0
 }
